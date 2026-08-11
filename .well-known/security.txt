@@ -1,0 +1,5 @@
+Contact: mailto:hola@mundoanonimous.vercel.app
+Expires: 2027-08-11T00:00:00.000Z
+Acknowledgments: https://mundoanonimous.vercel.app/
+Preferred-Languages: es, en
+Canonical: https://mundoanonimous.vercel.app/.well-known/security.txt
