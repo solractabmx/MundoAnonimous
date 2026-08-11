@@ -1,3 +1,19 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cristal</title><script src="https://cdn.tailwindcss.com"></script></head><body class="bg-black text-white min-h-screen p-4">
-<div class="flex justify-between max-w-[520px] mx-auto"><button onclick="location.href='index.html'" class="text-xs bg-white/10 px-3 py-1 rounded-full">← Lobby</button><span class="text-xs">💎 CRISTAL</span></div>
-<div class="max-w-[520px] mx-auto mt-10 text-center"><p class="text-6xl">💎</p><h1 class="mt-4 font-bold">CRISTAL - Video Random</h1><p class="text-xs text-zinc-500 mt-2">Aquí pega luego el código completo de cristal con PeerJS. Por ahora MVP listo para deploy.</p><button class="mt-6 bg-white text-black px-6 py-3 rounded-full font-bold text-sm">Buscar persona →</button></div></body></html>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cristal • Video</title><script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script></head>
+<body class="bg-black text-white min-h-screen flex flex-col"><div class="flex justify-between p-3 max-w-[520px] mx-auto w-full"><button onclick="location.href='index.html'" class="text-[11px] bg-white/10 px-3 py-1 rounded-full">←</button><span class="text-[11px]">💎 CRISTAL • <span id="status" class="text-zinc-500">Conectando...</span></span></div>
+<div class="flex-1 flex flex-col max-w-[520px] mx-auto w-full p-3 gap-3">
+<div class="flex-1 bg-zinc-900 rounded-[20px] relative overflow-hidden"><video id="remote" autoplay playsinline class="w-full h-full object-cover"></video><div id="waiting" class="absolute inset-0 flex items-center justify-center flex-col"><div class="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin"></div><p class="text-xs mt-3 text-zinc-400">Buscando a alguien...</p></div><video id="local" autoplay muted playsinline class="absolute bottom-3 right-3 w-24 h-32 bg-black rounded-xl object-cover border border-white/20"></video></div>
+<div class="flex gap-2"><button onclick="next()" class="flex-1 bg-white text-black py-3 rounded-full font-bold text-sm">Siguiente →</button><button onclick="location.href='index.html'" class="px-5 bg-white/10 rounded-full text-sm">Salir</button></div>
+</div>
+<script>
+let peer, localStream, currentConn=null;
+async function init(){
+ localStream=await navigator.mediaDevices.getUserMedia({video:true,audio:true});
+ document.getElementById('local').srcObject=localStream;
+ peer=new Peer({config:{iceServers:[{urls:'stun:stun.l.google.com:19302'}]}});
+ peer.on('open',id=>{document.getElementById('status').textContent='Listo'; buscar()});
+ peer.on('call',call=>{call.answer(localStream); call.on('stream',s=>{document.getElementById('remote').srcObject=s; document.getElementById('waiting').style.display='none';}); currentConn=call;});
+}
+function buscar(){ document.getElementById('waiting').style.display='flex'; let id='cristal-'+Math.floor(Math.random()*10000); let c=peer.connect(id); setTimeout(()=>{ if(document.getElementById('waiting').style.display!=='none'){ let call=peer.call(id,localStream); if(call){ call.on('stream',s=>{document.getElementById('remote').srcObject=s; document.getElementById('waiting').style.display='none';}); currentConn=call;}} },2000);}
+function next(){ if(currentConn) currentConn.close(); document.getElementById('remote').srcObject=null; buscar(); }
+init();
+</script></body></html>
