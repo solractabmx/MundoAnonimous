@@ -1,18 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MundoAnonimous</title><script src="https://cdn.tailwindcss.com"></script></head>
-<body class="bg-[#050508] text-white min-h-screen p-6">
-<div class="max-w-[520px] mx-auto">
-<h1 class="text-3xl font-black mt-10">MUNDO<span class="text-zinc-600">ANONIMOUS</span></h1>
-<p class="text-[11px] text-zinc-500 mt-2">5 mundos anónimos • sin registro • P2P • se borra todo</p>
-<div class="grid gap-3 mt-8">
-<button onclick="location.href='cristal.html'" class="text-left p-5 rounded-[24px] bg-gradient-to-br from-purple-600 to-blue-600"><div class="font-bold">💎 CRISTAL</div><div class="text-xs opacity-70">Video random + máscaras</div></button>
-<button onclick="location.href='niebla.html'" class="text-left p-5 rounded-[24px] bg-gradient-to-br from-zinc-700 to-zinc-900"><div class="font-bold">🌫️ NIEBLA</div><div class="text-xs opacity-70">Solo audio, ahorra datos</div></button>
-<button onclick="location.href='arena.html'" class="text-left p-5 rounded-[24px] bg-gradient-to-br from-orange-600 to-red-600"><div class="font-bold">⚔️ ARENA</div><div class="text-xs opacity-70">Audio + Gato para romper hielo</div></button>
-<button onclick="location.href='muro.html'" class="text-left p-5 rounded-[24px] bg-white text-black"><div class="font-bold">🧱 MURO</div><div class="text-xs opacity-70">Secretos que se borran en 24h</div></button>
-<button onclick="location.href='tribus.html'" class="text-left p-5 rounded-[24px] bg-gradient-to-br from-emerald-600 to-teal-700"><div class="font-bold">🔥 TRIBUS</div><div class="text-xs opacity-70">Salas de voz 5-10 personas</div></button>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MundoAnonimous</title><script src="https://cdn.tailwindcss.com"></script>
+<style>
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.animate-float{animation:float 3s ease-in-out infinite}
+</style>
+</head>
+<body class="bg-[#050508] text-white min-h-screen">
+<!-- SPLASH -->
+<div id="splash" class="fixed inset-0 z-50 bg-[#050508] flex flex-col items-center justify-center p-6 transition-all duration-700">
+  <div class="animate-float">
+    <img src="logo.png" onerror="this.style.display='none';document.getElementById('fallback').style.display='flex'" class="w-28 h-28 object-contain mx-auto rounded-[24px]">
+    <div id="fallback" class="hidden w-28 h-28 bg-white text-black rounded-[28px] items-center justify-center font-black text-3xl mx-auto">M</div>
+  </div>
+  <h1 class="text-3xl font-black mt-6 tracking-tight">MUNDO<span class="text-zinc-600">ANONIMOUS</span></h1>
+  <p class="text-[10px] tracking-[0.3em] text-zinc-500 mt-2">SIN NOMBRE • SIN ROSTRO • SIN RASTRO</p>
+  <div class="mt-10 flex flex-col items-center gap-2">
+    <div class="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+    <p class="text-[10px] text-zinc-600">Entrando...</p>
+  </div>
+  <p class="absolute bottom-6 text-[9px] text-zinc-700">18+ • Anónimo • P2P • Hecho en Valladolid</p>
 </div>
-<p class="text-[9px] text-zinc-700 text-center mt-10">18+ • Hecho en Valladolid, Yucatán</p>
+
+<!-- LOBBY REAL -->
+<div id="app" class="max-w-[520px] mx-auto p-6 opacity-0 transition-opacity duration-700">
+  <div class="flex justify-between items-center mt-2">
+    <h1 class="text-xl font-black">MUNDO<span class="text-zinc-600">ANONIMOUS</span></h1>
+    <span class="text-[10px] bg-white/10 px-2 py-1 rounded-full">● Online</span>
+  </div>
+  <p class="text-[11px] text-zinc-500 mt-1">Elige un mundo. Sin registro.</p>
+  <div class="grid gap-3 mt-6">
+    <button onclick="location.href='cristal.html'" class="text-left p-5 rounded-[24px] bg-gradient-to-br from-purple-600 to-blue-600"><div class="font-bold">💎 CRISTAL</div><div class="text-xs opacity-70">Video random + máscaras</div></button>
+    <button onclick="location.href='niebla.html'" class="text-left p-5 rounded-[24px] bg-gradient-to-br from-zinc-700 to-zinc-900"><div class="font-bold">🌫️ NIEBLA</div><div class="text-xs opacity-70">Solo audio, a oscuras</div></button>
+    <button onclick="location.href='arena.html'" class="text-left p-5 rounded-[24px] bg-gradient-to-br from-orange-600 to-red-600"><div class="font-bold">⚔️ ARENA</div><div class="text-xs opacity-70">Audio + Gato</div></button>
+    <button onclick="location.href='muro.html'" class="text-left p-5 rounded-[24px] bg-white text-black"><div class="font-bold">🧱 MURO</div><div class="text-xs opacity-70">Secretos 24h</div></button>
+    <button onclick="location.href='tribus.html'" class="text-left p-5 rounded-[24px] bg-gradient-to-br from-emerald-600 to-teal-700"><div class="font-bold">🔥 TRIBUS</div><div class="text-xs opacity-70">Salas de voz grupal</div></button>
+  </div>
 </div>
-<script>localStorage.setItem('edad','18+')</script>
-</body></html>
+
+<script>
+setTimeout(()=>{
+  document.getElementById('splash').style.opacity='0';
+  document.getElementById('splash').style.pointerEvents='none';
+  document.getElementById('app').style.opacity='1';
+}, 2500);
+</script>
+</body>
+</html>
