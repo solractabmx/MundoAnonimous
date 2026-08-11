@@ -1,0 +1,10 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Muro</title><script src="https://cdn.tailwindcss.com"></script></head>
+<body class="bg-[#050508] text-white min-h-screen"><div class="max-w-[520px] mx-auto p-4">
+<div class="flex justify-between items-center"><button onclick="location.href='index.html'" class="text-[11px] bg-white/10 px-3 py-1 rounded-full">← Lobby</button><span class="text-[10px] text-zinc-500">🧱 MURO • 24h</span></div>
+<div class="mt-6 bg-white/5 border border-white/10 rounded-[20px] p-4"><textarea id="t" placeholder="Escribe un secreto anónimo..." class="w-full bg-transparent outline-none text-sm min-h-[70px]"></textarea><button onclick="post()" class="mt-3 bg-white text-black px-5 py-2 rounded-full text-xs font-bold w-full">Publicar anónimo</button></div>
+<div id="feed" class="mt-6 space-y-3 pb-20"></div>
+</div><script>
+let posts=JSON.parse(localStorage.getItem('muro')||'[{"text":"A veces siento que nadie me escucha de verdad, solo aquí puedo decirlo.","time":1710000000000},{"text":"Hoy renuncié y tengo miedo pero me siento libre.","time":1710000000000}]');
+function post(){let v=document.getElementById('t').value.trim();if(v.length<3)return;posts.unshift({text:v,time:Date.now()});localStorage.setItem('muro',JSON.stringify(posts));document.getElementById('t').value='';render()}
+function render(){document.getElementById('feed').innerHTML=posts.map(p=>`<div class="bg-white/[0.06] border border-white/5 p-4 rounded-[16px] text-[13px] leading-relaxed">${p.text}<div class="text-[10px] text-zinc-600 mt-2">Anon • hace ${Math.floor((Date.now()-p.time)/60000)||1}m</div></div>`).join('')}render()
+</script></body></html>
