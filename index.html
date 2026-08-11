@@ -1,87 +1,87 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MundoAnonimous - Chat Anónimo, Video Random y Secretos | Valladolid</title>
-<meta name="description" content="Entra a 5 mundos 100% anónimos. Sin registro, sin historial, conexión P2P. Video con máscaras, audio a oscuras, secretos que se borran en 24h. Desde Valladolid, Yucatán.">
-<meta name="keywords" content="chat anónimo, video random, chat yucatán, omegle alternativa, chat sin registro, secretos anónimos">
-<meta name="author" content="MundoAnonimous">
+<title>MundoAnonimous - Chat Anónimo y Video Random</title>
+<meta name="description" content="Chat anónimo sin registro. 5 mundos P2P: video random, audio a oscuras y secretos que se borran en 24h.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://mundoanonimous.vercel.app/">
 <meta name="theme-color" content="#050508">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="logo.png" type="image/png">
-
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://mundoanonimous.vercel.app/">
-<meta property="og:title" content="MundoAnonimous - Sin nombre, sin rostro, sin rastro">
-<meta property="og:description" content="5 mundos anónimos, sin registro. ¿Te atreves a entrar?">
+<meta property="og:title" content="MundoAnonimous - Chat Anónimo y Video Random">
+<meta property="og:description" content="Chat anónimo sin registro. 5 mundos P2P: video, audio y secretos.">
 <meta property="og:image" content="https://mundoanonimous.vercel.app/logo.png">
-<meta property="og:locale" content="es_MX">
-
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MundoAnonimous">
-<meta name="twitter:description" content="5 mundos 100% anónimos y P2P.">
-<meta name="twitter:image" content="https://mundoanonimous.vercel.app/logo.png">
-
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebSite",
-  "name":"MundoAnonimous",
-  "url":"https://mundoanonimous.vercel.app/",
-  "description":"Chat anónimo P2P con 5 mundos",
-  "inLanguage":"es-MX"
-}
-</script>
-
+<meta property="og:url" content="https://mundoanonimous.vercel.app/">
+<meta property="og:type" content="website">
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-[#050508] text-white min-h-screen antialiased">
 
 <!-- SPLASH -->
 <div id="splash" class="fixed inset-0 z-50 bg-[#050508] flex flex-col items-center justify-center p-6">
-  <div class="animate-float">
-    <img src="logo.png" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'w-28 h-28 bg-white text-black rounded-[28px] flex items-center justify-center font-black text-4xl',innerText:'M'}))" class="w-28 h-28 object-contain rounded-[28px] shadow-[0_0_40px_rgba(255,255,255,0.15)]">
-  </div>
-  <h1 class="text-[32px] font-black mt-6 tracking-[-0.02em]">MUNDO<span class="text-zinc-600">ANONIMOUS</span></h1>
-  <p class="text-[10px] tracking-[0.35em] text-zinc-500 mt-2">SIN NOMBRE • SIN ROSTRO • SIN RASTRO</p>
-  <div class="mt-12 flex flex-col items-center gap-3">
-    <div class="w-7 h-7 border-2 border-white/10 border-t-white rounded-full animate-spin"></div>
-    <p class="text-[10px] text-zinc-600 animate-pulse">Cargando mundos...</p>
-  </div>
-  <p class="absolute bottom-8 text-[9px] text-zinc-700 tracking-widest">VALLADOLID, YUCATÁN • 18+</p>
+  <img src="logo.png" alt="Logo MundoAnonimous chat anónimo" class="w-24 h-24 rounded-[20px] object-contain animate-pulse">
+  <h1 class="text-2xl font-black mt-4">MUNDOANONIMOUS</h1>
+  <p class="text-[10px] tracking-widest text-zinc-500 mt-1">CHAT ANÓNIMO • VIDEO RANDOM • SECRETOS</p>
 </div>
 
-<!-- APP -->
-<div id="app" class="max-w-[520px] mx-auto p-6 opacity-0 transition-opacity duration-700">
-  <div class="flex justify-between items-center mt-1">
-    <div class="flex items-center gap-3">
-      <img src="logo.png" class="w-9 h-9 rounded-[10px] object-cover">
-      <div class="leading-none"><div class="font-black text-[15px]">MUNDO<span class="text-zinc-600">ANONIMOUS</span></div><div class="text-[9px] text-zinc-500 tracking-widest mt-0.5">P2P • ANÓNIMO • 18+</div></div>
+<div id="app" class="max-w-[520px] mx-auto p-6 opacity-0">
+<header>
+  <div class="flex justify-between items-center mt-2">
+    <div class="flex items-center gap-2">
+      <img src="logo.png" alt="Logo MundoAnonimous chat anónimo" class="w-9 h-9 rounded-lg">
+      <span class="font-black text-sm">MUNDOANONIMOUS</span>
     </div>
-    <div class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-1 rounded-full">● LIVE</div>
+    <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded-full">● Online</span>
   </div>
+  <!-- H1 CORREGIDO - contiene palabras del titulo -->
+  <h1 class="text-[28px] font-black leading-[0.9] mt-8 tracking-tight">Chat Anónimo<br>y Video Random<br><span class="text-zinc-600">sin registro.</span></h1>
+  <p class="text-[13px] text-zinc-400 mt-3">Entra a 5 mundos de chat anónimo. Video random con máscaras, audio a oscuras y secretos anónimos que se borran en 24 horas. Todo P2P.</p>
+</header>
 
-  <div class="grid gap-3 mt-7">
-    <button onclick="location.href='cristal.html'" class="group text-left p-5 rounded-[24px] bg-gradient-to-br from-violet-600 to-blue-600 relative overflow-hidden"><div class="absolute inset-0 bg-white/0 group-active:bg-white/10 transition"></div><div class="relative"><div class="font-bold flex justify-between">💎 CRISTAL <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded-full">VIDEO</span></div><div class="text-xs opacity-70 mt-1">Máscaras + voz distorsionada</div></div></button>
-    <button onclick="location.href='niebla.html'" class="text-left p-5 rounded-[24px] bg-zinc-900 border border-white/5"><div class="font-bold">🌫️ NIEBLA</div><div class="text-xs text-zinc-500 mt-1">Solo audio, a oscuras</div></button>
-    <button onclick="location.href='arena.html'" class="text-left p-5 rounded-[24px] bg-gradient-to-br from-orange-600 to-red-600"><div class="font-bold">⚔️ ARENA</div><div class="text-xs opacity-80 mt-1">Audio + Gato para romper hielo</div></button>
-    <button onclick="location.href='muro.html'" class="text-left p-5 rounded-[24px] bg-white text-black"><div class="font-bold">🧱 MURO</div><div class="text-xs opacity-60 mt-1">Secretos que se borran en 24h</div></button>
-    <button onclick="location.href='tribus.html'" class="text-left p-5 rounded-[24px] bg-gradient-to-br from-emerald-600 to-teal-700"><div class="font-bold">🔥 TRIBUS</div><div class="text-xs opacity-80 mt-1">Salas de voz 5-10 personas</div></button>
+<nav class="grid gap-3 mt-6" aria-label="Mundos">
+  <a href="cristal.html" class="block p-5 rounded-[24px] bg-gradient-to-br from-violet-600 to-blue-600">
+    <div class="font-bold">💎 Cristal - Video Random Anónimo</div>
+    <div class="text-xs opacity-80 mt-1">Chat de video random con máscaras anónimas</div>
+  </a>
+  <a href="niebla.html" class="block p-5 rounded-[24px] bg-zinc-900 border border-white/10">
+    <div class="font-bold">🌫️ Niebla - Chat de Audio Anónimo</div>
+    <div class="text-xs text-zinc-400 mt-1">Chat anónimo solo audio, a oscuras</div>
+  </a>
+  <a href="arena.html" class="block p-5 rounded-[24px] bg-gradient-to-br from-orange-600 to-red-600">
+    <div class="font-bold">⚔️ Arena - Chat y Juego del Gato</div>
+    <div class="text-xs opacity-80 mt-1">Chat anónimo con juego para romper el hielo</div>
+  </a>
+  <a href="muro.html" class="block p-5 rounded-[24px] bg-white text-black">
+    <div class="font-bold">🧱 Muro - Secretos Anónimos</div>
+    <div class="text-xs opacity-60 mt-1">Publica secretos anónimos que se borran en 24h</div>
+  </a>
+  <a href="tribus.html" class="block p-5 rounded-[24px] bg-gradient-to-br from-emerald-600 to-teal-700">
+    <div class="font-bold">🔥 Tribus - Salas de Voz Anónimas</div>
+    <div class="text-xs opacity-80 mt-1">Salas grupales de chat anónimo</div>
+  </a>
+</nav>
+
+<!-- ENLACES INTERNOS - esto arregla el error principal -->
+<footer class="mt-10 border-t border-white/5 pt-6">
+  <div class="grid grid-cols-2 gap-2 text-[11px]">
+    <a href="cristal.html" class="text-zinc-500 hover:text-white">Video Random Anónimo</a>
+    <a href="niebla.html" class="text-zinc-500 hover:text-white">Chat Audio Anónimo</a>
+    <a href="arena.html" class="text-zinc-500 hover:text-white">Chat con Juegos</a>
+    <a href="muro.html" class="text-zinc-500 hover:text-white">Secretos Anónimos</a>
+    <a href="tribus.html" class="text-zinc-500 hover:text-white">Salas de Voz</a>
+    <a href="/" class="text-zinc-500 hover:text-white">Chat Anónimo Yucatán</a>
   </div>
-
-  <div class="mt-8 p-3 rounded-2xl bg-white/[0.04] border border-white/5 text-[11px] text-zinc-500 text-center">Sin registro • Sin historial • Todo entre pares. Si cierras, desapareces.</div>
+  <p class="text-[10px] text-zinc-700 mt-6 text-center">Chat anónimo sin registro • Video random P2P • Hecho en Valladolid, Yucatán • 18+</p>
+</footer>
 </div>
 
 <script>
 setTimeout(()=>{
-  document.getElementById('splash').style.opacity='0';
-  document.getElementById('splash').style.pointerEvents='none';
+  document.getElementById('splash').style.display='none';
   document.getElementById('app').style.opacity='1';
-}, 2200);
-localStorage.setItem('edad','18+');
+}, 1800);
 </script>
 </body>
-  </html>
+</html>
