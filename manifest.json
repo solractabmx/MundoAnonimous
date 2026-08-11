@@ -1,13 +1,10 @@
 {
-  "name": "MundoAnonimous",
+  "name": "MundoAnonimous - Chat Anónimo",
   "short_name": "Anonimous",
-  "description": "5 mundos anónimos sin registro, P2P, se borra todo. Video, audio y secretos.",
+  "description": "Chat anónimo sin registro. Video random y secretos P2P.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#050508",
   "theme_color": "#050508",
-  "icons": [
-    {"src": "logo.png","sizes": "192x192","type": "image/png"},
-    {"src": "logo.png","sizes": "512x512","type": "image/png"}
-  ]
+  "icons": [{"src": "/logo.png","sizes": "512x512","type": "image/png","purpose":"any maskable"}]
 }
