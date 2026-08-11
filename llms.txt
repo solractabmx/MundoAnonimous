@@ -1,0 +1,10 @@
+# MundoAnonimous
+
+> Chat anónimo 100% sin registro. 5 mundos P2P: video random con máscaras, audio a oscuras, juego del gato, secretos que se borran y salas de voz. Desde Valladolid, Yucatán.
+
+## Mundos
+- [Cristal - Video Random](/cristal.html): Video chat anónimo P2P
+- [Niebla - Audio](/niebla.html): Chat de voz anónimo
+- [Arena - Juego](/arena.html): Audio + gato para romper hielo
+- [Muro - Secretos](/muro.html): Secretos anónimos 24h
+- [Tribus - Salas](/tribus.html): Salas de voz grupales
