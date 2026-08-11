@@ -1,1 +1,135 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Arena</title><script src="https://cdn.tailwindcss.com"></script></head><body class="bg-[#050508] text-white min-h-screen p-4"><div class="flex justify-between max-w-[520px] mx-auto"><button onclick="location.href='index.html'" class="text-xs bg-white/10 px-3 py-1 rounded-full">← Lobby</button><span class="text-xs">⚔️ ARENA</span></div><div class="max-w-[520px] mx-auto mt-20 text-center"><p class="text-6xl">⚔️</p><h1 class="mt-4 font-bold">ARENA</h1><p class="text-xs text-zinc-500">Audio + Gato para romper hielo</p></div></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Arena • Audio + Gato</title><script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script></head>
+<body class="bg-[#050508] text-white min-h-screen">
+<div class="max-w-[520px] mx-auto p-3 flex flex-col h-screen">
+<div class="flex justify-between items-center"><button onclick="location.href='index.html'" class="text-[11px] bg-white/10 px-3 py-1.5 rounded-full">← Lobby</button><div class="text-[11px]"><span class="text-orange-400">⚔️ ARENA</span> <span id="status" class="text-zinc-600 ml-2">Conectando...</span></div><div class="w-6"></div></div>
+
+<div class="flex-1 flex flex-col items-center justify-center">
+<!-- VS -->
+<div class="flex items-center gap-4 mt-4">
+<div class="text-center"><div class="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center font-black text-xl">TÚ</div><div class="text-[10px] mt-1 text-zinc-400">❌</div></div>
+<div class="text-zinc-600 font-black">VS</div>
+<div class="text-center"><div id="rivalAvatar" class="w-16 h-16 rounded-full bg-zinc-800 flex items-center justify-center font-black text-xl">?</div><div class="text-[10px] mt-1 text-zinc-500">⭕</div></div>
+</div>
+
+<p id="turnText" class="text-xs text-zinc-500 mt-6">Buscando rival...</p>
+
+<!-- GATO -->
+<div class="grid grid-cols-3 gap-2 mt-4 w-[260px]">
+<button onclick="play(0)" class="cell aspect-square bg-white/5 border border-white/10 rounded-2xl text-2xl font-black flex items-center justify-center"></button>
+<button onclick="play(1)" class="cell aspect-square bg-white/5 border border-white/10 rounded-2xl text-2xl font-black flex items-center justify-center"></button>
+<button onclick="play(2)" class="cell aspect-square bg-white/5 border border-white/10 rounded-2xl text-2xl font-black flex items-center justify-center"></button>
+<button onclick="play(3)" class="cell aspect-square bg-white/5 border border-white/10 rounded-2xl text-2xl font-black flex items-center justify-center"></button>
+<button onclick="play(4)" class="cell aspect-square bg-white/5 border border-white/10 rounded-2xl text-2xl font-black flex items-center justify-center"></button>
+<button onclick="play(5)" class="cell aspect-square bg-white/5 border border-white/10 rounded-2xl text-2xl font-black flex items-center justify-center"></button>
+<button onclick="play(6)" class="cell aspect-square bg-white/5 border border-white/10 rounded-2xl text-2xl font-black flex items-center justify-center"></button>
+<button onclick="play(7)" class="cell aspect-square bg-white/5 border border-white/10 rounded-2xl text-2xl font-black flex items-center justify-center"></button>
+<button onclick="play(8)" class="cell aspect-square bg-white/5 border border-white/10 rounded-2xl text-2xl font-black flex items-center justify-center"></button>
+</div>
+
+<div class="flex gap-2 mt-6 w-full">
+<button onclick="resetGame()" class="flex-1 bg-white/10 py-3 rounded-full text-xs font-bold">Reiniciar Gato</button>
+<button onclick="nextRival()" class="flex-1 bg-white text-black py-3 rounded-full text-xs font-bold">Siguiente rival →</button>
+</div>
+<p class="text-[10px] text-zinc-600 mt-4 text-center">Audio anónimo activo • Ganas rompiendo el hielo jugando</p>
+</div>
+
+<audio id="remoteAudio" autoplay></audio>
+</div>
+
+<script>
+let peer, localStream, conn, dataConn, board=["","","","","","","","",""], myTurn=true, myMark="❌", rivalMark="⭕", gameOver=false;
+
+async function init(){
+ localStream = await navigator.mediaDevices.getUserMedia({audio:true});
+ peer = new Peer({config:{iceServers:[{urls:'stun:stun.l.google.com:19302'}]}});
+ peer.on('open', id=>{
+   document.getElementById('status').textContent='Buscando...';
+   buscar();
+ });
+ peer.on('connection', c=>{
+   dataConn=c;
+   c.on('data', handleData);
+ });
+ peer.on('call', call=>{
+   call.answer(localStream);
+   call.on('stream', s=>{
+     document.getElementById('remoteAudio').srcObject=s;
+     document.getElementById('status').textContent='Conectado • Hablando';
+     document.getElementById('rivalAvatar').textContent='R';
+     document.getElementById('turnText').textContent='¡Tu turno!';
+   });
+ });
+}
+
+function buscar(){
+ let target='arena-'+Math.floor(Math.random()*5000);
+ let d=peer.connect(target);
+ d.on('open',()=>{dataConn=d; myTurn=true;});
+ d.on('data',handleData);
+ setTimeout(()=>{
+   let call=peer.call(target, localStream);
+   if(call){
+     call.on('stream', s=>{
+       document.getElementById('remoteAudio').srcObject=s;
+       document.getElementById('status').textContent='Conectado';
+       document.getElementById('rivalAvatar').textContent='R';
+       document.getElementById('turnText').textContent='¡Tu turno!';
+     });
+   }
+ },1000);
+}
+
+function handleData(data){
+ if(data.type==='move'){
+   board[data.idx]=rivalMark;
+   updateUI();
+   myTurn=true;
+   document.getElementById('turnText').textContent='Tu turno';
+   checkWin();
+ }else if(data.type==='reset'){
+   resetGame(false);
+ }
+}
+
+function play(idx){
+ if(board[idx]!=='' ||!myTurn || gameOver) return;
+ board[idx]=myMark;
+ updateUI();
+ myTurn=false;
+ document.getElementById('turnText').textContent='Turno rival...';
+ if(dataConn) dataConn.send({type:'move', idx});
+ checkWin();
+}
+
+function updateUI(){
+ document.querySelectorAll('.cell').forEach((el,i)=>{
+   el.textContent=board[i];
+   el.className='cell aspect-square bg-white/5 border border-white/10 rounded-2xl text-2xl font-black flex items-center justify-center '+(board[i]?'bg-white/10':'');
+ });
+}
+
+function checkWin(){
+ const wins=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+ for(let w of wins){
+   if(board[w[0]] && board[w[0]]===board[w[1]] && board[w[0]]===board[w[2]]){
+     document.getElementById('turnText').textContent= board[w[0]]===myMark? '¡Ganaste! 🔥' : 'Perdiste, pero rompiste el hielo';
+     gameOver=true; return;
+   }
+ }
+ if(board.every(c=>c!=='')){ document.getElementById('turnText').textContent='Empate • Buena plática'; gameOver=true; }
+}
+
+function resetGame(send=true){
+ board=["","","","","","","","",""]; gameOver=false; myTurn=true; updateUI();
+ document.getElementById('turnText').textContent='Tu turno';
+ if(send && dataConn) dataConn.send({type:'reset'});
+}
+
+function nextRival(){ location.reload(); }
+
+init();
+</script>
+</body>
+  </html>
